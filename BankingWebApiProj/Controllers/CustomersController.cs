@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BankingWebApi.Models;
 using BankingWebApiProj.Data;
+using System.Security.Principal;
 
 namespace BankingWebApiProj.Controllers
 {
@@ -25,10 +26,10 @@ namespace BankingWebApiProj.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Customer>>> GetCustomer()
         {
-          if (_context.Customers == null)
-          {
-              return NotFound();
-          }
+            if (_context.Customers == null)
+            {
+                return NotFound();
+            }
             return await _context.Customers.ToListAsync();
         }
 
@@ -36,10 +37,10 @@ namespace BankingWebApiProj.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Customer>> GetCustomer(int id)
         {
-          if (_context.Customers == null)
-          {
-              return NotFound();
-          }
+            if (_context.Customers == null)
+            {
+                return NotFound();
+            }
             var customer = await _context.Customers.FindAsync(id);
 
             if (customer == null)
@@ -81,9 +82,12 @@ namespace BankingWebApiProj.Controllers
             return NoContent();
         }
 
-        // POST: api/Customers
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+        // Add Account checking out savings
+
+
+// POST: api/Customers
+// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+[HttpPost]
         public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
         {
           if (_context.Customers == null)

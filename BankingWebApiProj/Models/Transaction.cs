@@ -7,17 +7,6 @@ namespace BankingWebApiProj.Models
     public class Transaction
     {
 
-        /*
-        - Id : int, PK
-- AccountId : int (FK to Account)
-- PreviousBalance : decimal
-- TransactionType : string "D" for deposit, "W" for Withdraw
-- NewBalance : decimal
-- Description : string
-- CreatedDate : DateTime (default to DateTime.Now)
-
-        */
-
         public int Id { get; set; }
         public int AccountId { get; set; }
         public virtual Account? Account { get; set; }
