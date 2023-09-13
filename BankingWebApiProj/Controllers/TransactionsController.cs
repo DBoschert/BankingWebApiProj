@@ -96,6 +96,8 @@ namespace BankingWebApiProj.Controllers
             return CreatedAtAction("GetTransaction", new { id = transaction.Id }, transaction);
         }
 
+        
+
         // DELETE: api/Transactions/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTransaction(int id)

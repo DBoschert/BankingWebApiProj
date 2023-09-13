@@ -5,9 +5,12 @@ using BankingWebApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<BankingWebApiProjContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("BankingWebApiProjContext") ?? throw new InvalidOperationException("Connection string 'BankingWebApiProjContext' not found.")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DevDb") 
+            ?? throw new InvalidOperationException("Connection string 'DevDb' not found.")));
 
 // Add services to the container.
+
+builder.Services.AddCors();
 
 builder.Services.AddControllers();
 
@@ -16,6 +19,8 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 
 app.UseAuthorization();
+
+app.UseCors(x => x.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
 
 app.MapControllers();
 
