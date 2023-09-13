@@ -93,7 +93,8 @@ namespace BankingWebApiProj.Controllers
             } 
             if (type == "SV") {
                 account.InterestRate = 0.1m;
-            } 
+            }
+            account.CustomerId = id;
 
             _context.Accounts.Add(account);
             await _context.SaveChangesAsync();
