@@ -86,20 +86,20 @@ namespace BankingWebApiProj.Controllers
         [HttpPost("/{id}/addAccount/{type}")]
         public async Task<ActionResult<Customer>> AddAccount(int id, string type, Customer customer, Account account) {
             if (_context.Customers == null) return NotFound();
-            if (id != customer.Id) return BadRequest();
-            if (type == null) return BadRequest();
+            if (id != customer.Id || type == null) return BadRequest();
             if (type == "CK") {
                 account.InterestRate = 0;
-            } 
-            if (type == "SV") {
+            } else if (type == "SV") {
                 account.InterestRate = 0.1m;
+            } else {
+                return BadRequest();
             }
             account.CustomerId = id;
 
             _context.Accounts.Add(account);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("AddAccount", new { id = customer.Id }, account);
+            return CreatedAtAction("AddedAccount", new { id = customer.Id }, account);
         }
        
 
