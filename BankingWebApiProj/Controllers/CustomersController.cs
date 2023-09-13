@@ -22,6 +22,23 @@ namespace BankingWebApiProj.Controllers
             _context = context;
         }
 
+        //Get: api/Customers/{cardCode}/{pinCode}
+        [HttpGet("{cardCode}/{pinCode}")]
+
+        public async Task<ActionResult<Customer>> GetUserLogin(int cardCode, int pinCode)
+        {
+
+            var customer = await _context.Customers.SingleOrDefaultAsync(x => x.CardCode == cardCode && x.PinCode == pinCode);
+
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            return customer;
+        }
+
+
         // GET: api/Customers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Customer>>> GetCustomer()
@@ -82,7 +99,6 @@ namespace BankingWebApiProj.Controllers
             return NoContent();
         }
         
-
         // POST: api/Customers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
