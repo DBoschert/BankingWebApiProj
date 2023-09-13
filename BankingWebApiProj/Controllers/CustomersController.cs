@@ -83,6 +83,7 @@ namespace BankingWebApiProj.Controllers
         }
         
 
+<<<<<<< HEAD
         //AddAccount(Checking|Savings)
         // POST: api/Customers/5/addAccount/type
         [HttpPost("{id}/addAccount/{type}")]
@@ -113,6 +114,8 @@ namespace BankingWebApiProj.Controllers
         }
 
 
+=======
+>>>>>>> 768f17bf8e8fc6c2c793a88ab73ac8179b776728
         // POST: api/Customers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
