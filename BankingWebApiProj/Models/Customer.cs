@@ -14,7 +14,7 @@ namespace BankingWebApi.Models
         public int CardCode { get; set; }
         public int PinCode { get; set; }
         [Column(TypeName = "DateTime")]
-        public DateTime LastTransactionDate { get; set; }
+        public DateTime? LastTransactionDate { get; set; }
         [Column(TypeName = "DateTime")]
         public DateTime CreatedDate { get; set; } = DateTime.Now;
         [Column(TypeName = "DateTime")]

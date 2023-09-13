@@ -122,6 +122,27 @@ namespace BankingWebApiProj.Controllers
             return CreatedAtAction("GetCustomer", new { id = customer.Id }, customer);
         }
 
+        // DELETE: api/Customers/CloseAccount/id
+        [HttpDelete("closeaccount/{id}")]
+        public async Task<IActionResult> CloseAccount(int id)
+        {
+            if (_context.Accounts == null)
+            {
+                return NotFound();
+            }
+            
+            var account = await _context.Accounts.FindAsync(id);
+
+            if (account == null)
+            {
+                return NotFound();
+            }
+
+            _context.Accounts.Remove(account);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
         // DELETE: api/Customers/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCustomer(int id)
