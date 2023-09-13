@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BankingWebApiProj.Migrations
 {
     /// <inheritdoc />
-    public partial class AddedCloseAccount : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -81,8 +81,7 @@ namespace BankingWebApiProj.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Accounts_CustomerId",
                 table: "Accounts",
-                column: "CustomerId",
-                unique: true);
+                column: "CustomerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Customers_CardCode",
