@@ -83,20 +83,6 @@ namespace BankingWebApiProj.Controllers
         }
         
 
-        //AddAccount(Checking|Savings)
-        // POST: api/Customers/addAccount/
-        [HttpPost("addAccount")]
-        public async Task<ActionResult<Account>> AddAccount(Account account) {
-            if (_context.Accounts == null) {
-                return Problem("Entity set 'BankingWebApiProjContext.Account'  is null.");
-            }
-            _context.Accounts.Add(account);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetAccount", new { id = account.Id }, account);
-        }
-
-
         // POST: api/Customers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
