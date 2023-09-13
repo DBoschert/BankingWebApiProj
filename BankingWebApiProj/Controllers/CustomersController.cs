@@ -84,32 +84,16 @@ namespace BankingWebApiProj.Controllers
         
 
         //AddAccount(Checking|Savings)
-        // POST: api/Customers/5/addAccount/type
-        [HttpPost("/{id}/addAccount/{type}")]
-        public async Task<ActionResult<Customer>> AddAccount(int id, string type, Customer customer) {
-
-            decimal ir;
-
-            if (_context.Customers == null) return NotFound();
-            if (id != customer.Id || type == null) return BadRequest();
-            if (type == "CK") {
-                ir = 0;
-            } else if (type == "SV") {
-                ir = 0.1m;
-            } else {
-                return BadRequest();
+        // POST: api/Customers/addAccount/
+        [HttpPost("addAccount")]
+        public async Task<ActionResult<Account>> AddAccount(Account account) {
+            if (_context.Accounts == null) {
+                return Problem("Entity set 'BankingWebApiProjContext.Account'  is null.");
             }
-
-            var account = new Account() {
-                Type = type,
-                InterestRate = ir,
-                CustomerId = customer.Id,
-            };
-
             _context.Accounts.Add(account);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("AddedAccount", new { id = customer.Id }, account);
+            return CreatedAtAction("GetAccount", new { id = account.Id }, account);
         }
 
 
