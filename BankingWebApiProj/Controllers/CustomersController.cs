@@ -22,6 +22,23 @@ namespace BankingWebApiProj.Controllers
             _context = context;
         }
 
+        //Get: api/Customers/{cardCode}/{pinCode}
+        [HttpGet("{cardCode}/{pinCode}")]
+
+        public async Task<ActionResult<Customer>> GetUserLogin(int cardCode, int pinCode)
+        {
+
+            var customer = await _context.Customers.SingleOrDefaultAsync(x => x.CardCode == cardCode && x.PinCode == pinCode);
+
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            return customer;
+        }
+
+
         // GET: api/Customers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Customer>>> GetCustomer()
@@ -82,40 +99,6 @@ namespace BankingWebApiProj.Controllers
             return NoContent();
         }
         
-
-<<<<<<< HEAD
-        //AddAccount(Checking|Savings)
-        // POST: api/Customers/5/addAccount/type
-        [HttpPost("{id}/addAccount/{type}")]
-        public async Task<ActionResult<Customer>> AddAccount(int id, string type, Customer customer) {
-
-            decimal ir;
-
-            if (_context.Customers == null) return NotFound();
-            if (id != customer.Id || type == null) return BadRequest();
-            if (type == "CK") {
-                ir = 0;
-            } else if (type == "SV") {
-                ir = 0.1m;
-            } else {
-                return BadRequest();
-            }
-
-            var account = new Account() {
-                Type = type,
-                InterestRate = ir,
-                CustomerId = customer.Id,
-            };
-
-            _context.Accounts.Add(account);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("AddedAccount", new { id = customer.Id }, account);
-        }
-
-
-=======
->>>>>>> 768f17bf8e8fc6c2c793a88ab73ac8179b776728
         // POST: api/Customers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
