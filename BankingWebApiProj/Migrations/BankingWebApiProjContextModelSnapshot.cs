@@ -57,8 +57,7 @@ namespace BankingWebApiProj.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId")
-                        .IsUnique();
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("Accounts");
                 });
@@ -139,8 +138,8 @@ namespace BankingWebApiProj.Migrations
             modelBuilder.Entity("BankingWebApi.Models.Account", b =>
                 {
                     b.HasOne("BankingWebApi.Models.Customer", "Customer")
-                        .WithOne("Account")
-                        .HasForeignKey("BankingWebApi.Models.Account", "CustomerId")
+                        .WithMany("Accounts")
+                        .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -160,7 +159,7 @@ namespace BankingWebApiProj.Migrations
 
             modelBuilder.Entity("BankingWebApi.Models.Customer", b =>
                 {
-                    b.Navigation("Account");
+                    b.Navigation("Accounts");
                 });
 #pragma warning restore 612, 618
         }

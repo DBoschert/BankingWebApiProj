@@ -20,7 +20,7 @@ namespace BankingWebApi.Models
         [Column(TypeName = "DateTime")]
         public DateTime? ModifiedDate { get; set; }
 
-        public virtual Account? Account { get; set; }
+        public virtual IEnumerable<Account>? Accounts { get; set; }
 
     }
 }

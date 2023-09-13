@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BankingWebApiProj.Migrations
 {
     [DbContext(typeof(BankingWebApiProjContext))]
-    [Migration("20230913143327_Added Close Account")]
-    partial class AddedCloseAccount
+    [Migration("20230913153241_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,8 +60,7 @@ namespace BankingWebApiProj.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId")
-                        .IsUnique();
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("Accounts");
                 });
@@ -142,8 +141,8 @@ namespace BankingWebApiProj.Migrations
             modelBuilder.Entity("BankingWebApi.Models.Account", b =>
                 {
                     b.HasOne("BankingWebApi.Models.Customer", "Customer")
-                        .WithOne("Account")
-                        .HasForeignKey("BankingWebApi.Models.Account", "CustomerId")
+                        .WithMany("Accounts")
+                        .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -163,7 +162,7 @@ namespace BankingWebApiProj.Migrations
 
             modelBuilder.Entity("BankingWebApi.Models.Customer", b =>
                 {
-                    b.Navigation("Account");
+                    b.Navigation("Accounts");
                 });
 #pragma warning restore 612, 618
         }
