@@ -82,28 +82,6 @@ namespace BankingWebApiProj.Controllers
             return NoContent();
         }
         
-        /*
-        //AddAccount(Checking|Savings)
-        // POST: api/Customers/5/addAccount/type
-        [HttpPost("/{id}/addAccount/{type}")]
-        public async Task<ActionResult<Customer>> AddAccount(int id, string type, Customer customer, Account account) {
-            if (_context.Customers == null) return NotFound();
-            if (id != customer.Id || type == null) return BadRequest();
-            if (type == "CK") {
-                account.InterestRate = 0;
-            } else if (type == "SV") {
-                account.InterestRate = 0.1m;
-            } else {
-                return BadRequest();
-            }
-            account.CustomerId = id;
-
-            _context.Accounts.Add(account);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("AddedAccount", new { id = customer.Id }, account);
-        }
-        */
 
         //AddAccount(Checking|Savings)
         // POST: api/Customers/5/addAccount/type
