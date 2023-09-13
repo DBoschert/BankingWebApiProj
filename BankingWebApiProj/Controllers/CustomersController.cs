@@ -85,7 +85,7 @@ namespace BankingWebApiProj.Controllers
 
         //AddAccount(Checking|Savings)
         // POST: api/Customers/5/addAccount/type
-        [HttpPost("/{id}/addAccount/{type}")]
+        [HttpPost("{id}/addAccount/{type}")]
         public async Task<ActionResult<Customer>> AddAccount(int id, string type, Customer customer) {
 
             decimal ir;
