@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BankingWebApi.Models;
 using BankingWebApiProj.Data;
+using BankingWebApiProj.Models;
 
 namespace BankingWebApiProj.Controllers
 {
@@ -20,7 +21,21 @@ namespace BankingWebApiProj.Controllers
         {
             _context = context;
         }
+        
+        // Show Transactions
 
+        // GET: api/Accounts/Transactions/{id}
+        [HttpGet("transactions/{id}")]
+        public async Task<ActionResult<IEnumerable<Transaction>>> GetTransactions(int id)
+        {
+            if (_context.Transactions == null)
+            {
+                return NotFound();
+            }
+            var transactions = await _context.Transactions.Where(x => x.AccountId == id).ToListAsync();
+            return transactions;
+        }
+        
         // GET: api/Accounts/Balance/{id}
         [HttpGet("balance/{id}")]
         public async Task<ActionResult<decimal>> GetBalance(int id)
