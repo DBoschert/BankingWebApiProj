@@ -21,6 +21,19 @@ namespace BankingWebApiProj.Controllers
             _context = context;
         }
 
+        // GET: api/Accounts/Balance/{id}
+        [HttpGet("balance/{id}")]
+        public async Task<ActionResult<decimal>> GetBalance(int id)
+        {
+            var account = await _context.Accounts.FindAsync(id);
+            if(account == null)
+            {
+                return NotFound();
+            }
+            return account.Balance;
+        }
+
+
         // GET: api/Accounts
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Account>>> GetAccount()
@@ -48,6 +61,22 @@ namespace BankingWebApiProj.Controllers
             }
 
             return account;
+        }
+
+        // PUT: api/Accounts/Deposit/{amount}
+        [HttpPut("deposit/{amount}/{id}")]
+        public async Task<IActionResult> Deposit(decimal amount, int id, Account account)
+        {
+            account.Balance += amount;
+            return await PutAccount(id, account);
+        }
+
+        //PUT: api/Accounts/Withdraw/{amount}
+        [HttpPut("withdraw/{amount}/{id}")]
+        public async Task<IActionResult> Withdraw(decimal amount, int id, Account account)
+        {
+            account.Balance -= amount;
+            return await PutAccount(id, account);
         }
 
         // PUT: api/Accounts/5
