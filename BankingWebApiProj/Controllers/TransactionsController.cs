@@ -21,16 +21,6 @@ namespace BankingWebApiProj.Controllers
             _context = context;
         }
 
-        // GET: api/Transactions
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Transaction>>> GetTransaction()
-        {
-          if (_context.Transactions == null)
-          {
-              return NotFound();
-          }
-            return await _context.Transactions.ToListAsync();
-        }
 
         // GET: api/Transactions/5
         [HttpGet("{id}")]

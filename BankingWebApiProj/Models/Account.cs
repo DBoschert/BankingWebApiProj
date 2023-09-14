@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Transactions;
 
 namespace BankingWebApi.Models {
     public class Account {
@@ -19,5 +20,6 @@ namespace BankingWebApi.Models {
         
         public int CustomerId { get; set; }
         public virtual Customer? Customer { get; set; }
+
     }
 }
