@@ -63,6 +63,28 @@ namespace BankingWebApiProj.Controllers
             return account;
         }
 
+        //transfer withdraw from one account and make that withdrawed amount go into another account
+        
+        // PUT: api/Accounts/Transfer/{amount}/{id1}/{id2}
+
+        [HttpPut("transfer/{amount}/{id1}/{id2}")]
+        public async Task<IActionResult> Transfer(decimal amount, int id1, int id2, Account account)
+        {
+            var account1 = await _context.Accounts.FindAsync(id1);
+            var account2 = await _context.Accounts.FindAsync(id2);
+            if (account1 == null || account2 == null)
+            {
+                return NotFound();
+            }
+
+            account1.Balance -= amount;
+            
+            account2.Balance += amount;
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+        
+
         // PUT: api/Accounts/Deposit/{amount}
         [HttpPut("deposit/{amount}/{id}")]
         public async Task<IActionResult> Deposit(decimal amount, int id, Account account)
